@@ -12,14 +12,16 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Build index.html from b64 parts
+      - name: Build index.html from article fragments
         run: |
           set -euo pipefail
-          : > index.html
-          for i in 00 01 02 03 04 05 06 07 08 09 10 11; do
-            base64 -d "parts/p${i}.b64" >> index.html
-          done
+          test -f parts/head.html
+          test -f parts/tail.html
+          test -f parts/a00.html
+          test -f parts/a38.html
+          cat parts/head.html parts/a*.html parts/tail.html > index.html
+          wc -c index.html
           git config user.name "pages-bot"
           git config user.email "pages-bot@users.noreply.github.com"
           git add index.html
-          git diff --cached --quiet || (git commit -m "Rebuild index.html from b64 parts" && git push)
+          git diff --cached --quiet || (git commit -m "Rebuild index.html from article fragments" && git push)
