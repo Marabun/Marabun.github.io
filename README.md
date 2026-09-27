@@ -1,2 +1,3 @@
-# Marabun.github.io
-Static X feed digest (HTML)
+# marabun.github.io
+
+X feed digest (quotes in Russian).
