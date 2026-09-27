@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дайджест ленты X</title>
+<style>
+:root {
+  --bg: #0f1419;
+  --bg-elev: #1a2332;
+  --bg-card: #1c2736;
+  --border: #2d3a4d;
+  --text: #e7ecf3;
+  --muted: #9aa8bc;
+  --accent: #5b9fd4;
+  --accent-soft: rgba(91, 159, 212, 0.15);
+  --high: #3ecf8e;
+  --high-bg: rgba(62, 207, 142, 0.12);
+  --mid: #e6b84d;
+  --mid-bg: rgba(230, 184, 77, 0.12);
+  --low: #9aa8bc;
+  --low-bg: rgba(154, 168, 188, 0.12);
+  --quote-bar: #5b9fd4;
+  --shadow: 0 8px 24px rgba(0,0,0,.35);
+  --radius: 14px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f6f9;
+    --bg-elev: #ffffff;
+    --bg-card: #ffffff;
+    --border: #d8dee8;
+    --text: #1a2332;
+    --muted: #5c6b7e;
+    --accent: #2a7ab8;
+    --accent-soft: rgba(42, 122, 184, 0.1);
+    --shadow: 0 6px 20px rgba(26, 35, 50, .08);
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+}
+header.hero {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.4rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+h1 {
+  margin: 0 0 .35rem;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.sub {
+  color: var(--muted);
+  font-size: .9rem;
+  margin: 0 0 1rem;
+}
+.summary {
+  margin: 0;
+  font-size: 1.02rem;
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+.pill {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .28rem .7rem;
+  font-size: .8rem;
+  font-weight: 600;
+}
+h2.section {
+  font-size: 1.05rem;
+  margin: 1.75rem 0 .9rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.2rem 1rem;
+  margin-bottom: .9rem;
+  box-shadow: var(--shadow);
+}
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .6rem .8rem;
+  align-items: center;
+  margin-bottom: .7rem;
+}
+.who {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: 700;
+}
+.author {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+.author:hover { color: var(--accent); }
+.badges { display: flex; flex-wrap: wrap; gap: .35rem; }
+.badge {
+  font-size: .72rem;
+  font-weight: 650;
+  padding: .22rem .55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+.badge.topic {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.badge.useful.u-high { background: var(--high-bg); color: var(--high); }
+.badge.useful.u-mid { background: var(--mid-bg); color: var(--mid); }
+.badge.useful.u-low { background: var(--low-bg); color: var(--low); }
+.brief {
+  margin: 0 0 .75rem;
+  color: var(--muted);
+  font-size: .92rem;
+}
+.brief .label {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--accent);
+  margin-right: .35rem;
+}
+.quote {
+  margin: 0 0 .9rem;
+  padding: .75rem .95rem;
+  border-left: 3px solid var(--quote-bar);
+  background: var(--accent-soft);
+  border-radius: 0 10px 10px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: .95rem;
+  color: var(--text);
+}
+.card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+  align-items: center;
+}
+.xlink {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: .9rem;
+}
+.xlink:hover { text-decoration: underline; }
+.meta { color: var(--muted); font-size: .8rem; }
+.empty { color: var(--muted); font-style: italic; }
+footer.page-foot {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: .78rem;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>Дайджест ленты X</h1>
+    <p class="sub">фильтр Jev · 2026-09-27 16:13 UTC</p>
+    <p class="summary">За прогон: собрано 200, в дайджест попало 39, отсеяно 114, на грани 47. Темы среди keep: ИИ (17), криптовалюты (14), инженерия (5), продуктовый релиз (3).</p>
+    <div class="stats">
+      <span class="pill">собрано 200</span>
+      <span class="pill">в дайджесте 39</span>
+      <span class="pill">отсеяно 114</span>
+      <span class="pill">на грани 47</span>
+    </div>
+  </header>
+
+  <h2 class="section">Посты</h2>
+  
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">1</span>
+      <a class="author" href="https://x.com/oldstackjournal/status/2103877759605060058" target="_blank" rel="noopener noreferrer">@oldstackjournal</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">инженерия</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: инженерия; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Safari 27 now has an MCP server for web development.
+
+So Codex/Claude/etc can inspect the actual DOM, network requests, console output and screenshots from Safari instead of you trying to describe what broke</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/oldstackjournal/status/2103877759605060058" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">2</span>
+      <a class="author" href="https://x.com/KevKevPal/status/2103488446018814396" target="_blank" rel="noopener noreferrer">@KevKevPal</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Эта неделя в Bitcoin Core #59
+
+Silent Payments наконец-то привлекли внимание.
+
+Bitcoin Core теперь может создавать silent payments, и кошелёк уже на подходе. Также появился новый способ перечислить все транзакции, о которых знает ваш кошелёк, и кандидат на выпуск 32.0 готов к</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/KevKevPal/status/2103488446018814396" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Читаю</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">3</span>
+      <a class="author" href="https://x.com/denisfinanzas/status/2103878458044551257" target="_blank" rel="noopener noreferrer">@denisfinanzas</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Дешевая задолженность в AAVE v4 на новой сети Arc
+
+Взятие задолженности в USDC обходится в 1,79% годовых
+
+Использование BTC/ETH/EURC в качестве залога с более чем $40M доступной ликвидности
+
+Задолженность очень дешевая, и пока без дополнительных стимулов
+
+Такие вещи не</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/denisfinanzas/status/2103878458044551257" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">4</span>
+      <a class="author" href="https://x.com/nutlope/status/2103548354022305802" target="_blank" rel="noopener noreferrer">@nutlope</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Только что выложил в открытый доступ Tev1 0.8B!
+
+Веса ниже. Смело скачивайте их.
+
+Конечно, не так хорош, как Tev1 4B или Jev, но он полностью работает локально на Mac. Он может довольно неплохо справляться с очень простыми задачами классификации.
+
+
+https://
+huggingface.co/togethercomput
+er/Tev1-0.8B-experimental
+…</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/nutlope/status/2103548354022305802" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">5</span>
+      <a class="author" href="https://x.com/QuintenFrancois/status/2104217743306133587" target="_blank" rel="noopener noreferrer">@QuintenFrancois</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">DTCC is launching tokenization for Russell 1000 stocks, major ETFs and US Treasuries across a securities ecosystem worth $114 TRILLION.
+
+And Chainlink is already working with DTCC on the infrastructure to connect, price and move tokenized assets 24/7.</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/QuintenFrancois/status/2104217743306133587" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">6</span>
+      <a class="author" href="https://x.com/TheBlockCo/status/2104226408994308347" target="_blank" rel="noopener noreferrer">@TheBlockCo</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">THE BLOCK: Виталик Бутерин говорит, что Ethereum называют «блокчейном» в основном «по историческим причинам» и что он превращается в «криптографический мировой компьютер».
+
+Бутерин спрогнозировал слоты длительностью от 4 до 8 секунд к 2030 году и финализацию за 8–32 секунды в</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/TheBlockCo/status/2104226408994308347" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">7</span>
+      <a class="author" href="https://x.com/Outcomexyz/status/2104207361598775632" target="_blank" rel="noopener noreferrer">@Outcomexyz</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">BREAKING: Hyperliquid will double the maximum number of HIP-4 outcome markets per deployer to 200, and the maximum number of daily deployed outcomes per deployer to 1,000.
+
+TIME TO ACCELERATE.</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/Outcomexyz/status/2104207361598775632" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">8</span>
+      <a class="author" href="https://x.com/scottmelker/status/2104043364886679826" target="_blank" rel="noopener noreferrer">@scottmelker</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">АРБИТРУМ $ARB ONE СТАНОВИТСЯ ПЕРВЫМ БЛОКЧЕЙНОМ, ДОСТИГНУВШИМ 7 000 RWAS, ТЕПЕРЬ ХОСТИТ 7 083 ТОКЕНИЗИРОВАННЫХ АКТИВОВ РЕАЛЬНОГО МИРА С РАСПРОДАННОЙ СТОИМОСТЬЮ ~$1,03 МЛРД</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/scottmelker/status/2104043364886679826" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Crypto</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">9</span>
+      <a class="author" href="https://x.com/johnennis/status/2104153886420357233" target="_blank" rel="noopener noreferrer">@johnennis</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">инженерия</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: инженерия; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Если присмотреться повнимательнее, вы увидите, что механика того, как Opus 5.5 создаёт видео, просто безумна
+
+Он пишет самодостаточную программу на HTML/JS, которая рисует каждый кадр с нуля, затем эта программа делается скриншот кадр за кадром и сшивается в MP4
+
+Это не</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/johnennis/status/2104153886420357233" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">10</span>
+      <a class="author" href="https://x.com/scottmelker/status/2104144524469735510" target="_blank" rel="noopener noreferrer">@scottmelker</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">ЭТФЫ США НА СПОТОВЫЙ БИТКОИН $BTC ЗАФИКСИРОВАЛИ ПРИТОК $2,4 МЛРД НА ПРОШЛОЙ НЕДЕЛЕ, МАКСИМАЛЬНЫЙ С ОКТЯБРЯ 2025 Г., ПЕРЕВЕДШИ ЧИСТЫЙ ПОТОК 2026 Г. В ПОЛОЖИТЕЛЬНУЮ ЗОНУ ДО ~$934 МЛН</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/scottmelker/status/2104144524469735510" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Crypto</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">11</span>
+      <a class="author" href="https://x.com/openshipio/status/2104187404533838043" target="_blank" rel="noopener noreferrer">@openshipio</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">продуктовый релиз</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: продуктовый релиз; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Your project architecture, now on an interactive canvas.
+
+See how your services connect. 
+
+Click a node to inspect it, restart it, or stop it - directly from the canvas.
+
+Open your project → Topology.
+
+Available in Openship 0.8.0</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/openshipio/status/2104187404533838043" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">12</span>
+      <a class="author" href="https://x.com/hishnash/status/2104090720965697797" target="_blank" rel="noopener noreferrer">@hishnash</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">инженерия</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: инженерия; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Most heatmaps use rectangular grids, but with Swift Charts we can use PointPlots to arrange cells with alternative shapes. In my new post, we explore hexagonal cells for spatial data.</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/hishnash/status/2104090720965697797" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Для вас</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">13</span>
+      <a class="author" href="https://x.com/mattpocockuk/status/2103748049906397613" target="_blank" rel="noopener noreferrer">@mattpocockuk</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Множество людей спрашивают меня: «Как мне создать файл CODING_STANDARDS.md?»
+
+Мой ответ в том, что если вы используете его правильно, он должен быть пустым всего около 5 минут.
+
+Каждую значимую вещь, которую ваш агент делает неправильно, нужно записывать в CODING_STANDARDS.
+
+-</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/mattpocockuk/status/2103748049906397613" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Для вас</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">14</span>
+      <a class="author" href="https://x.com/CJ_Bitcoin/status/2103955583372251599" target="_blank" rel="noopener noreferrer">@CJ_Bitcoin</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Мой разговор с 
+@TimKotzman
+ о цифровом кредите, включая переход 
+@Strategy
+ к ежедневным дивидендам, базу владельцев и $STRC L2s.
+
+0:00 - Введение 
+1:13 - Что такое цифровой кредит? 
+6:16 - Как Strategy размышляет об ежедневных дивидендах? 
+10:05 - Что такое STRC и почему стоит его</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/CJ_Bitcoin/status/2103955583372251599" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Crypto</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">15</span>
+      <a class="author" href="https://x.com/LangChain/status/2103530944645017662" target="_blank" rel="noopener noreferrer">@LangChain</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">продуктовый релиз</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: продуктовый релиз; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Движок LangSmith v2
+ Управляемые глубокие агенты v0.8
+ Траектории LangSmith
+ Тонкая настройка LangSmith
+ Пользовательские приложения
+
+Всё, что мы объявили на Interrupt NYC</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/LangChain/status/2103530944645017662" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">16</span>
+      <a class="author" href="https://x.com/scottmelker/status/2104239699707797895" target="_blank" rel="noopener noreferrer">@scottmelker</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">The Government Lets You Gamble - But Won’t Let You Invest In Crypto | 
+@HesterPeirce
+  
+
+00:00 Why the Clarity Act Failed
+02:08 SEC and CFTC Move Forward Without Clarity
+03:22 The SEC’s Innovation Exemption for Tokenized Stocks
+05:01 A Bridge to a Permanent Crypto Framework
+07:27</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/scottmelker/status/2104239699707797895" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Crypto</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">17</span>
+      <a class="author" href="https://x.com/daniel_mac8/status/2103570418573705612" target="_blank" rel="noopener noreferrer">@daniel_mac8</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Невероятная эффективность Opus 5.5 означает, что динамические рабочие процессы Claude Code теперь очень полезны.
+
+Вы не потратите свой недельный лимит использования за 5 минут.
+
+Запустил задачу в виде динамического рабочего процесса на ~3 часа, и она использовала 17% от моего</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/daniel_mac8/status/2103570418573705612" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Читаю</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">18</span>
+      <a class="author" href="https://x.com/scottmelker/status/2099196188587393299" target="_blank" rel="noopener noreferrer">@scottmelker</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">Биткоин побеждает, пока Минфин отбирает власть у ФРС | 
+@CaitlinLong_
+ 
+
+00:00 Токенизированные депозиты наконец-то набирают обороты
+02:12 Почему токенизация внезапно движется так быстро
+03:24 Токенизированные депозиты могут заменить стейблкоины
+07:24 Закон «Гений» против Закона</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/scottmelker/status/2099196188587393299" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Crypto</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">19</span>
+      <a class="author" href="https://x.com/crypto_gateway/status/2103897103172825398" target="_blank" rel="noopener noreferrer">@crypto_gateway</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Высокий сигнал</p>
+  <blockquote class="quote">БИТКОИН МОЖЕТ ПОЛУЧИТЬ ПРИВАТНЫЕ ТРАНЗАКЦИИ БЕЗ ИЗМЕНЕНИЯ ПРОТОКОЛА
+
+Вышла новая идея под названием «Shielded Bitcoin», которая пытается внедрить в BTC уровень приватности, похожий на Zcash, с использованием доказательств с нулевым разглашением.
+
+Сегодня Bitcoin — это</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/crypto_gateway/status/2103897103172825398" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">20</span>
+      <a class="author" href="https://x.com/jakemor/status/2104015376195743784" target="_blank" rel="noopener noreferrer">@jakemor</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-high">Высокий сигнал</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Высокий сигнал</p>
+  <blockquote class="quote">1-shotted by opus 5.5 - full interactive demo + apple style landing page. my mind is blown. 
+https://
+kanna.sh</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/jakemor/status/2104015376195743784" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Для вас</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">21</span>
+      <a class="author" href="https://x.com/0xmn4/status/2104227837838311602" target="_blank" rel="noopener noreferrer">@0xmn4</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Слабо интересно</p>
+  <blockquote class="quote">overview of the entire top zk sector projects; exactly 4 days after sec commissioner peirce urged regulators to use it for kyc</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/0xmn4/status/2104227837838311602" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">22</span>
+      <a class="author" href="https://x.com/MiaAI_lab/status/2104232075003875775" target="_blank" rel="noopener noreferrer">@MiaAI_lab</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">My ranking of frontier cloud and local AI models</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/MiaAI_lab/status/2104232075003875775" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">23</span>
+      <a class="author" href="https://x.com/nicbstme/status/2104002112715977060" target="_blank" rel="noopener noreferrer">@nicbstme</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Забавно. я дал Muse доступ к моей папке с воспоминаниями: одна страница на каждого человека, которого я знаю, сгенерированная другим агентом.
+
+Для каждой страницы тот агент делегирует исследование субагентам: поиск в вебе, последние 100 электронных писем, приглашения в календаре,</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/nicbstme/status/2104002112715977060" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">24</span>
+      <a class="author" href="https://x.com/CopilotKit/status/2103917895466308066" target="_blank" rel="noopener noreferrer">@CopilotKit</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Jev  CopilotKit
+
+Мы протестировали рендеринг UI блок о блок, чтобы продемонстрировать, как Jev от 
+@typesafeai
+ может мгновенно стримить компоненты с GPT-6 Luna.
+
+Один и тот же промпт, рендерер и тестовые данные.</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/CopilotKit/status/2103917895466308066" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Для вас</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">25</span>
+      <a class="author" href="https://x.com/_can1357/status/2104048739316883656" target="_blank" rel="noopener noreferrer">@_can1357</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">не уверен, почему я не подумал об этом раньше, но кажется, мы наконец решили проблему автоматического выбора уровня усилий для субагентов, звучит просто, но:
+- просим главного агента выбрать =&gt; он отмахивается
+- передаем задачу классификатору =&gt; маленькая модель с трудом выбирает</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/_can1357/status/2104048739316883656" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">26</span>
+      <a class="author" href="https://x.com/mehdi_made/status/2104225924011233776" target="_blank" rel="noopener noreferrer">@mehdi_made</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">инженерия</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: инженерия; полезность: Слабо интересно</p>
+  <blockquote class="quote">Tried to rebuild Pico Cam in react-native. 
+
+The Dynamic Island is the camera.
+
+
+https://
+motionary.dev/animations/dyn
+amic-island-instant-camera
+…</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/mehdi_made/status/2104225924011233776" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Для вас</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">27</span>
+      <a class="author" href="https://x.com/arscontexta/status/2104196215067836782" target="_blank" rel="noopener noreferrer">@arscontexta</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">agentic note-taking is building a markdown vault together with your agent
+
+and now you can build the tools, skills and apps to work with those notes in the same workspace</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/arscontexta/status/2104196215067836782" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">28</span>
+      <a class="author" href="https://x.com/Rainmaker1973/status/2104189310631342439" target="_blank" rel="noopener noreferrer">@Rainmaker1973</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">инженерия</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: инженерия; полезность: Слабо интересно</p>
+  <blockquote class="quote">его 3D-печатная кольчуга снимается прямо с печатной платформы полностью сцепленной — сборка не требуется.
+
+[ PropsMaker]</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/Rainmaker1973/status/2104189310631342439" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Читаю</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">29</span>
+      <a class="author" href="https://x.com/dotkrueger/status/2104169122892546353" target="_blank" rel="noopener noreferrer">@dotkrueger</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Слабо интересно</p>
+  <blockquote class="quote">Большая картина для большого Биткоина:
+
+IBIT (единственный ETF, который имеет значение) добавлял 34 тыс. BTC в месяц в течение 18 месяцев после запуска, затем -6 тыс. BTC /месяц в течение 10 месяцев, а потом +18 тыс. BTC/месяц
+
+Можно сказать, что в последний месяц темпы снова</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/dotkrueger/status/2104169122892546353" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">30</span>
+      <a class="author" href="https://x.com/willdepue/status/2104058040018416090" target="_blank" rel="noopener noreferrer">@willdepue</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">если бы tinker запустил API для предварительного обучения, это было бы так круто. вероятно, в основном за счёт цитат/корпоративных, но на самом деле нет хорошего OSS-стека для предварительного обучения, в отличие от RL</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/willdepue/status/2104058040018416090" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">31</span>
+      <a class="author" href="https://x.com/RoundtableSpace/status/2103945329917988961" target="_blank" rel="noopener noreferrer">@RoundtableSpace</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Сказка 5.2 против Gemini 4 Pro против Astra 6 Pro — всем трем поручили нарисовать контроллер Xbox 360 в чистом SVG.
+
+Разрыв между ними — это новый бенчмарк, который действительно имеет значение.
+ 
+https://
+x.com/chetaslua/stat
+us/2101627748326515031/video/1
+…</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/RoundtableSpace/status/2103945329917988961" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">32</span>
+      <a class="author" href="https://x.com/thebuggeddev/status/2104094704543662358" target="_blank" rel="noopener noreferrer">@thebuggeddev</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Годами люди говорили: «Сначала научись программировать».
+
+Теперь можно сначала придумать идею, а остальное додумать потом.
+
+Попросил Claude Opus 5.5 создать этот маленький художественный мир на чистом JavaScript, где дерево растёт со временем, ты можешь схватить и потрясти его</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/thebuggeddev/status/2104094704543662358" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">33</span>
+      <a class="author" href="https://x.com/yunta_tsai/status/2104085051138797656" target="_blank" rel="noopener noreferrer">@yunta_tsai</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Даже лучшие модели обучаются на убыточном остатке мира. Язык — это не реальность; это медленная социальная компрессия её. Разговорный английский несёт десятки бит в секунду новой информации, что значительно ниже пропускной способности модема 56k. Текст плотнее, но всё равно</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/yunta_tsai/status/2104085051138797656" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">34</span>
+      <a class="author" href="https://x.com/TokenGremlin/status/2104182491573534852" target="_blank" rel="noopener noreferrer">@TokenGremlin</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Правда в том, что OpenAI продолжает пытаться выжать максимум из той же базы предобучения, Дуг, в то время как мы действительно хотим увидеть модели, построенные на более новой базе предобучения, Бел.
+
+Это, вероятно, часть того, почему Opus 5.5 ощущается таким «новым», в то время</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/TokenGremlin/status/2104182491573534852" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Для вас</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">35</span>
+      <a class="author" href="https://x.com/alikaplan_tech/status/2103938356082090149" target="_blank" rel="noopener noreferrer">@alikaplan_tech</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">смотрите это
+
+написано с claude opus 5.5 за 1 час  
+один html  
+3d в браузере  
+
+datacenter → gpu → transistör → atom  
+
+то, что я не смог сделать за 3 дня, модель закончила за 1 час  
+как думаете, после этого работа motion graphic закончится?</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/alikaplan_tech/status/2103938356082090149" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">36</span>
+      <a class="author" href="https://x.com/IATheYoker/status/2104159647049650354" target="_blank" rel="noopener noreferrer">@IATheYoker</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">продуктовый релиз</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: продуктовый релиз; полезность: Слабо интересно</p>
+  <blockquote class="quote">В Берлине стояла ОЧЕРЕДЬ, чтобы примерить роботизированные ноги.
+
+Их привязываешь к талии.
+Делаешь шаг.
+И моторы толкают тебя за бедра и колени.
+
+Некоторые люди арендовали их только для того, чтобы обойти ярмарку, не уставая.
+
+Они весят 2,6 килограмма и помещаются в рюкзак.</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/IATheYoker/status/2104159647049650354" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Для вас</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">37</span>
+      <a class="author" href="https://x.com/alexbosworth/status/2103561116924494076" target="_blank" rel="noopener noreferrer">@alexbosworth</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">криптовалюты</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: криптовалюты; полезность: Слабо интересно</p>
+  <blockquote class="quote">The same promise and peril that AI poses on a BTC security front is also posed to BTC privacy. Better AI will find more holes but new software can also be made to help transactions leave less of a trace than ever before or help existing solutions be more usable and boost adoption</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/alexbosworth/status/2103561116924494076" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: Крипто</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">38</span>
+      <a class="author" href="https://x.com/antirez/status/2104130171305680972" target="_blank" rel="noopener noreferrer">@antirez</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Хорошие программисты заявляют, что используют модели вроде GPT 6 Astra, не получая хороших результатов: это заставляет меня чувствовать, будто я живу в параллельной вселенной. Но объяснение не такое уж сложное: хорошее программирование в прошлом и сейчас требует разного набора</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/antirez/status/2104130171305680972" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+<article class="card">
+  <header class="card-head">
+    <div class="who">
+      <span class="num">39</span>
+      <a class="author" href="https://x.com/kimmonismus/status/2104182175209767016" target="_blank" rel="noopener noreferrer">@kimmonismus</a>
+    </div>
+    <div class="badges">
+      <span class="badge topic">ИИ</span>
+      <span class="badge useful u-mid">Слабо интересно</span>
+    </div>
+  </header>
+  <p class="brief"><span class="label">кратко</span> тема: ИИ; полезность: Слабо интересно</p>
+  <blockquote class="quote">Я не знаю, как Anthropic это провернули, но мне нужно разобраться: Opus 5.5 не только невероятно хорошая модель, но и цены на неё невероятно выгодные; Opus теперь выглядит как выдающе эффективная модель.
+
+Заставляет задуматься, насколько эффективнее будет sonnet 5.5.</blockquote>
+  <footer class="card-foot">
+    <a class="xlink" href="https://x.com/kimmonismus/status/2104182175209767016" target="_blank" rel="noopener noreferrer">Открыть в X →</a>
+    <span class="meta">вкладка: ИИ</span>
+  </footer>
+</article>
+
+  <footer class="page-foot">Дайджест ленты X · keep-only</footer>
+</div>
+</body>
+</html>
